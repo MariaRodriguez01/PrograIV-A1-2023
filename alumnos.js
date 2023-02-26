@@ -135,7 +135,10 @@ Vue.component('component-alumnos',{
                                 </tr>
                                 <tr>
                                     <th>CODIGO</th>
-                                    <th colspan="5">NOMBRE</th>
+                                    <th colspan="1">NOMBRE</th>
+                                    <th>DIRECCION</th>
+                                    <th>TELEFONO</th>
+                                    <th>DUI</th>
                                 </tr>
                             </thead>
                             <tbody>
