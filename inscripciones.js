@@ -8,6 +8,7 @@ Vue.component('component-inscripciones',{
                 idinscripcion : '',                
                 codigomateria : '',
                 nombrealumno : '',
+                ingreso : '',
 
                
             }
@@ -41,6 +42,7 @@ Vue.component('component-inscripciones',{
             this.inscripcion.idinscripcion = '';           
             this.inscripcion.codigomateria = '';
             this.inscripcion.nombrealumno = '';
+            this.inscripcion.ingreso = '';
            
         },
         modificarInscripcion(inscripcion){
@@ -81,6 +83,15 @@ Vue.component('component-inscripciones',{
                                         v-model="inscripcion.nombrealumno" type="text" class="form-control" name="txtNombrealumnoInscripcion" id="txtNombrealumnoInscripcion">
                                 </div>
                             </div>
+                            <div class="row p-1">
+                                <div class="col-3 col-md-2">
+                                    <label for="txtIngresoInscricopn">NUEVO O ANTIGUO INGRESO:</label>
+                                </div>
+                                <div class="col-9 col-md-6">
+                                    <input required pattern="[A-Za-zÑñáéíóú ]{3,75}"
+                                        v-model="inscripcion.ingreso" type="text" class="form-control" name="txtIngresoInscripcion" id="txtIngresoInscripcion">
+                                </div>
+                            </div>
                        
                             <div class="row p-1">
                                 <div class="col-3 col-md-3">
@@ -119,6 +130,7 @@ Vue.component('component-inscripciones',{
                                                           
                                 <td>{{ inscripcion.codigomateria }}</td>
                                 <td>{{ inscripcion.nombrealumno }}</td>
+                                <td>{{ inscripcion.ingreso }}</td>
                                 <td><button class="btn btn-danger" @click="eliminarInscripcion(inscripcion)">ELIMINAR</button></td>
                             </tr>
                         </tbody>

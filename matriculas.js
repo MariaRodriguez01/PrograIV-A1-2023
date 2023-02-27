@@ -55,7 +55,7 @@ Vue.component('component-matriculas',{
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header">REGISTRO DE ALUMNOS MATRICULADOS</div>
+                    <div class="card-header">REGISTRO DE MATRICULAS</div>
                     <div class="card-body">
                         <form id="frmMatricula" @reset.prevent="nuevoMatricula" v-on:submit.prevent="guardarMatricula">
                             <div class="row p-1">
@@ -101,7 +101,7 @@ Vue.component('component-matriculas',{
             </div>
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header">LISTADO DE ALUMNOS MATRICULADOS</div>
+                    <div class="card-header">LISTADO DE MATRICULAS</div>
                     <div class="card-body">
                         <table class="table table-bordered table-hover">
                             <thead>
