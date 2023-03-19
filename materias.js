@@ -25,6 +25,11 @@ Vue.component('component-materias',{
                 this.materias.splice(index,1);
             }
             localStorage.setItem("materias", JSON.stringify(this.materias) );
+            fetch(`private/modulos/materias/materias.php?accion=${this.accion}&materias=${JSON.stringify(this.materia)}`)
+            .then(resp=>resp.json())
+            .then(resp=>{
+                console.log(resp);
+            });
             this.nuevoMateria();
         },
         eliminarMateria(materia){

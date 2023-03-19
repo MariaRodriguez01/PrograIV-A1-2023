@@ -28,6 +28,11 @@ Vue.component('component-alumnos',{
                 this.alumnos.splice(index,1);
             }
             localStorage.setItem("alumnos", JSON.stringify(this.alumnos) );
+            fetch(`private/modulos/alumnos/alumnos.php?accion=${this.accion}&alumnos=${JSON.stringify(this.alumno)}`)
+            .then(resp=>resp.json())
+            .then(resp=>{
+                console.log(resp);
+            });
             this.nuevoAlumno();
         },
         eliminarAlumno(alumno){

@@ -2,26 +2,23 @@
 include '../../Config/Config.php';
 extract($_REQUEST);
 
-$docentes = isset($docentes) ? $docentes : '[]';
+$materias = isset($materias) ? $materias : '[]';
 $accion = isset($accion) ? $accion : '';
-$class_docente = new Docente($conexion);
-if( $accion=='consultar' ){
-    print_r(json_encode($class_docente->consultar('')));
-}else{
-    print_r($class_docente->recibir_datos($docentes));
-}
-class Docente{
+$class_materia = new Materia($conexion);
+print_r($class_materia->recibir_datos($materias));
+
+class Materia{
     private $datos=[], $db, $respuesta=['msg'=>'ok'];
 
     public function __construct($db){
         $this->db = $db;
     }
-    public function recibir_datos($docente){
-        $this->datos = json_decode($docente, true);
+    public function recibir_datos($materia){
+        $this->datos = json_decode($materia, true);
         return $this->validar_datos();
     }
     private function validar_datos(){
-        if(empty($this->datos['idDocente'])){
+        if(empty($this->datos['idMateria'])){
             $this->respuesta['msg'] = 'Nose pudo seleccionar el ID';
         }
         if(empty($this->datos['codigo'])){
@@ -29,26 +26,26 @@ class Docente{
         }
         if(empty($this->datos['nombre'])){
             $this->respuesta['msg'] = 'Por favor ingrese el nombre';
+       
         }
-        return $this->administrar_docente();
+        return $this->administrar_materia();
     }
-    private function administrar_docente(){
+    private function administrar_materia(){
         global $accion;
         if( $this->respuesta['msg']=='ok' ){
             if($accion=='nuevo'){
                 return $this->db->consultas(
-                    'INSERT INTO docentes VALUES(?,?,?)',
-                    $this->datos['idDocente'], $this->datos['codigo'], $this->datos['nombre']
+                    'INSERT INTO materias VALUES(?,?,?)',
+                    $this->datos['idMateria'], $this->datos['codigo'], $this->datos['nombre']
                 );
             }else if($accion=='modificar'){
                 return $this->db->consultas(
-                    'UPDATE docentes SET codigo=?, nombre=? WHERE idDocente=?',
-                    $this->datos['codigo'], $this->datos['nombre'], $this->datos['idDocente']
+                    'UPDATE materias SET codigo=?, nombre=? WHERE idMateria=?',
+                    $this->datos['codigo'], $this->datos['nombre'], $this->datos['idMateria']
                 );
             }else if($accion=='eliminar'){
                 return $this->db->consultas(
-                    'DELETE docentes FROM docentes WHERE idDocente=?',
-                    $this->datos['idDocente']
+                    'DELETE materias FROM materias WHERE idMateria=?',
                 );
             }
         }else{
@@ -56,7 +53,7 @@ class Docente{
         }
     }
     public function consultar(){
-        $this->db->consultas('SELECT * FROM docentes');
+        $this->db->consultas('SELECT * FROM materias');
         return $this->db->obtener_datos();
     }
 }
