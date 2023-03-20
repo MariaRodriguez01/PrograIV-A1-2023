@@ -21,20 +21,17 @@ class Inscripcion{
         if(empty($this->datos['idInscripcion'])){
             $this->respuesta['msg'] = 'Nose pudo seleccionar el ID';
         }
-        if(empty($this->datos['numeroInscripcion'])){
+        if(empty($this->datos['numero'])){
             $this->respuesta['msg'] = 'Por favor ingrese el numero de inscripcion';
+        }
+        if(empty($this->datos['alumno'])){
+            $this->respuesta['msg'] = 'Por favor ingrese el alumno';       
+        }
+        if(empty($this->datos['codigo'])){
+            $this->respuesta['msg'] = 'Por favor ingrese el codigo';
         }
         if(empty($this->datos['fecha'])){
             $this->respuesta['msg'] = 'Por favor ingrese la fecha';
-        }
-        if(empty($this->datos['pago'])){
-            $this->respuesta['msg'] = 'Por favor ingrese el pago';
-        }
-        if(empty($this->datos['alumno'])){
-            $this->respuesta['msg'] = 'Por favor ingrese el alumno';
-        }
-        if(empty($this->datos['id'])){
-            $this->respuesta['msg'] = 'Por favor ingrese el id';
         }
         return $this->administrar_inscripcion();
     }
@@ -44,12 +41,12 @@ class Inscripcion{
             if($accion=='nuevo'){
                 return $this->db->consultas(
                     'INSERT INTO inscripciones VALUES(?,?,?)',
-                    $this->datos['idInscripcion'], $this->datos['numeroInscripcion'], $this->datos['fecha'], $this->datos['pago'], $this->datos['alumno'], $this->datos['id']
+                    $this->datos['idInscripcion'], $this->datos['numero'], $this->datos['alumno'], $this->datos['codigo'], $this->datos['fecha']
                 );
             }else if($accion=='modificar'){
                 return $this->db->consultas(
-                    'UPDATE inscripciones SET numeroInscripcion=?, fecha=?, pago=?,  alumno=?,  id=? WHERE idInscripcion=?',
-                    $this->datos['numeroInscripcion'], $this->datos['fecha'], $this->datos['pago'], $this->datos['alumno'], $this->datos['id'], $this->datos['idInscripcion']
+                    'UPDATE inscripciones SET numero=?, alumno=?, codigo=?,  fecha=? WHERE idInscripcion=?',
+                    $this->datos['numero'], $this->datos['alumno'], $this->datos['codigo'], $this->datos['fecha'], $this->datos['idInscripcion']
                 );
             }else if($accion=='eliminar'){
                 return $this->db->consultas(
